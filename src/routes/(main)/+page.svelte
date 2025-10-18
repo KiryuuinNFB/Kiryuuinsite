@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Icon } from 'svelte-icons-pack';
 	import { BsDiscord, BsGithub, BsYoutube } from 'svelte-icons-pack/bs';
-	import { SiRoblox } from 'svelte-icons-pack/si';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import * as Alert from '$lib/components/ui/alert/index.js';
 </script>
@@ -10,10 +9,10 @@
 	class="min-h-screen bg-background font-sans selection:text-background selection:bg-signature !transition-all"
 >
 	<div class="mr-[25vw] ml-[25vw] mt-[30] flex flex-col">
-		<h1 class="text-5xl font-bold p-4">Kiryuuin</h1>
+		<h1 class="text-4xl font-bold p-4">Hii~~ Welcome to my site :3</h1>
 		<Separator />
 		<div class="justify-items-center">
-			<img src="kiryuuin.png" alt="my mascot" width="300" class="rounded-full" />
+			<img src="kiryuuinpfp.jpg" alt="my mascot" width="300" class="rounded-full m-4" />
 		</div>
 		<div class="p-4">
 			<p>
@@ -30,28 +29,31 @@
 			<h1 class="text-5xl font-bold p-4">Socials</h1>
 			<Separator />
 			<div class="flex flex-row space-x-4 justify-items-center p-4">
-				<Alert.Root class="max-w-96">
+				<Alert.Root class="max-w-96 max-h-32">
 					<Icon src={BsYoutube} />
-					<Alert.Title>Youtube</Alert.Title>
-					<Alert.Description>Kiryuuin / NFB Production</Alert.Description>
+					<a href="https://www.youtube.com/@KiryuuinNFB" target="_blank">
+						<Alert.Title>Youtube</Alert.Title>
+						<Alert.Description>Kiryuuin / NFB Production</Alert.Description>
+					</a>
 				</Alert.Root>
 
-				<Alert.Root class="max-w-96">
+				<Alert.Root class="max-w-96 max-h-32">
 					<Icon src={BsDiscord} />
-					<Alert.Title>Discord</Alert.Title>
-					<Alert.Description>kiryuuinnfb</Alert.Description>
+					<a href="https://discord.gg/wuG5U8h​​​" target="_blank">
+						<Alert.Title>Discord</Alert.Title>
+						<Alert.Description>kiryuuinnfb</Alert.Description>
+					</a>
 				</Alert.Root>
 
-				<Alert.Root class="max-w-96">
+				<Alert.Root class="max-w-96  max-h-32">
 					<Icon src={BsGithub} />
-					<Alert.Title>Github</Alert.Title>
-					<Alert.Description>KiryuuinNFB</Alert.Description>
+					<a href="https://github.com/KiryuuinNFB" target="_blank">
+						<Alert.Title>Github</Alert.Title>
+						<Alert.Description>KiryuuinNFB</Alert.Description>
+					</a>
 				</Alert.Root>
-				
 			</div>
-			<p class="text-muted-foreground">
-				More details in the Contact tab.
-			</p>
+			<p class="text-muted-foreground">More details in the Contact tab.</p>
 		</div>
 	</div>
 </div>
