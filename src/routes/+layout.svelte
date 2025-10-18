@@ -19,8 +19,4 @@
 
 <ModeWatcher />
 
-<div>
-
-</div>
-
 {@render children?.()}
