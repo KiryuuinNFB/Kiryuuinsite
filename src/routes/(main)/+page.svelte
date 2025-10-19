@@ -8,11 +8,16 @@
 <div
 	class="min-h-screen bg-background font-sans selection:text-background selection:bg-signature !transition-all"
 >
-	<div class="mr-[5vw] ml-[5vw] md:mr-[25vw] md:ml-[25vw] mt-[30] flex flex-col">
+	<div class="mr-[5vw] ml-[5vw] md:max-xl:mr-[12] md:max-xl:ml-[12] xl:mr-[25vw] xl:ml-[25vw] mt-[30] flex flex-col">
 		<h1 class="text-4xl font-bold p-4">Hii~~ Welcome to my site :3</h1>
 		<Separator />
 		<div class="justify-items-center">
-			<img src="kiryuuinpfp.jpg" alt="my mascot" width="300" class="rounded-full m-4" />
+			<div class="md:hidden">
+				<img src="kiryuuinpfp.jpg" alt="my mascot" width="200" class="rounded-full m-4" />
+			</div>
+			<div class="hidden md:flex">
+				<img src="kiryuuinpfp.jpg" alt="my mascot" width="300" class="rounded-full m-4" />
+			</div>
 		</div>
 		<div class="p-4">
 			<p>
