@@ -24,7 +24,7 @@
 					professionals in these fields.
 				</p>
 				<p class="pt-4">
-					I do cosplaying too so you might find me at several cosplay conventions.
+					I do cosplaying too so you might find me at several cosplay conventions. Feel free to ask me in person if you've found me.
 				</p>
 			</div>
 		</div>
@@ -36,6 +36,9 @@
 					This site is where you can download high quality audio files and instrumentals of my songs so you don't have to join my discord server
 					just to download them. And if you want to commission me, The details are on this site over
 					on the commission page as well. This site is also for me to put what I have learned about web dev to use. 
+				</p>
+				<p class="pt-4">
+					This site was made with Sveltekit and Elysia running in the backend. It was also made with love.
 				</p>
 			</div>
 		</div>
