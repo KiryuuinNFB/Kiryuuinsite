@@ -8,7 +8,7 @@
 <div
 	class="min-h-screen bg-background font-sans selection:text-background selection:bg-signature !transition-all"
 >
-	<div class="mr-[25vw] ml-[25vw] mt-[30] flex flex-col">
+	<div class="mr-[5vw] ml-[5vw] md:mr-[25vw] md:ml-[25vw] mt-[30] flex flex-col">
 		<h1 class="text-4xl font-bold p-4">Hii~~ Welcome to my site :3</h1>
 		<Separator />
 		<div class="justify-items-center">
@@ -28,8 +28,8 @@
 		<div class="p-4">
 			<h1 class="text-5xl font-bold p-4">Socials</h1>
 			<Separator />
-			<div class="flex flex-row space-x-4 justify-items-center p-4">
-				<Alert.Root class="max-w-96 max-h-32">
+			<div class="flex flex-col md:flex-row md:space-x-4 space-y-4 justify-items-center p-4">
+				<Alert.Root class="max-w-96 h-20">
 					<Icon src={BsYoutube} />
 					<a href="https://www.youtube.com/@KiryuuinNFB" target="_blank">
 						<Alert.Title>Youtube</Alert.Title>
@@ -37,15 +37,15 @@
 					</a>
 				</Alert.Root>
 
-				<Alert.Root class="max-w-96 max-h-32">
+				<Alert.Root class="max-w-96 h-20">
 					<Icon src={BsDiscord} />
-					<a href="https://discord.gg/wuG5U8h​​​" target="_blank">
+					<a href="https://discord.gg/B6EXwc8t2X" target="_blank">
 						<Alert.Title>Discord</Alert.Title>
 						<Alert.Description>kiryuuinnfb</Alert.Description>
 					</a>
 				</Alert.Root>
 
-				<Alert.Root class="max-w-96  max-h-32">
+				<Alert.Root class="max-w-96 h-20">
 					<Icon src={BsGithub} />
 					<a href="https://github.com/KiryuuinNFB" target="_blank">
 						<Alert.Title>Github</Alert.Title>
@@ -53,7 +53,7 @@
 					</a>
 				</Alert.Root>
 			</div>
-			<p class="text-muted-foreground">More details in the Contact tab.</p>
+			<a href="/contact" class="text-muted-foreground">More details in the Contact tab.</a>
 		</div>
 	</div>
 </div>

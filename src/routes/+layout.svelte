@@ -15,6 +15,7 @@
 		href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped&display=swap"
 		rel="stylesheet"
 	/>
+	<title>Kiryuuin</title>
 </svelte:head>
 
 <ModeWatcher />
