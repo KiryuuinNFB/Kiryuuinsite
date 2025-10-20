@@ -38,7 +38,7 @@
 					on the commission page as well. This site is also for me to put what I have learned about web dev to use. 
 				</p>
 				<p class="pt-4">
-					This site was made with Sveltekit and Elysia running in the backend. It was also made with love.
+					This site was made with Sveltekit and Elysia running in the backend. It was also made with love. I've always wanted to have a personal site.
 				</p>
 			</div>
 		</div>

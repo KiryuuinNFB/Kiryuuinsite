@@ -12,7 +12,7 @@
 <div
 	class="flex flex-row justify-between p-4 space-x-2 selection:bg-signature selection:text-background pr-8 pl-8 backdrop-blur-sm sticky top-0"
 >
-	<div class="font-[arial] font-bold flex flex-col !transition-all hover:text-signature">
+	<div class="font-[arial] font-bold flex flex-col hover:text-signature">
 		<a class="text-2xl font-stretch-condensed" href="/"> KIRYUUIN </a>
 		<a class="text-sm tracking-wide" href="/"> NFB Production </a>
 	</div>
@@ -23,7 +23,7 @@
 					<Button variant="outline" href="/about">About</Button>
 					<Button variant="outline">Commission</Button>
 					<Button variant="outline">Music</Button>
-					<Button variant="outline">Contact</Button>
+					<Button variant="outline" href="/contact">Contact</Button>
 				</ButtonGroup.Root>
 				<ButtonGroup.Root>
 					<Button onclick={toggleMode} variant="secondary">
@@ -50,7 +50,7 @@
 					<Button variant="outline" href="/about" size="lg">About</Button>
 					<Button variant="outline" size="lg">Commission</Button>
 					<Button variant="outline" size="lg">Music</Button>
-					<Button variant="outline" size="lg">Contact</Button>
+					<Button variant="outline" href="/contact" size="lg">Contact</Button>
 					<Separator />
 					<Button onclick={toggleMode} variant="secondary">
 						<SunMedium class="rotate-0 scale-100 !transition-all dark:-rotate-90 dark:scale-0" />

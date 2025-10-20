@@ -2,7 +2,7 @@
 	import '../app.css';
 	import { ModeWatcher } from "mode-watcher";
 	
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/kiryuuinsmol.png';
 
 	let { children } = $props();
 </script>
