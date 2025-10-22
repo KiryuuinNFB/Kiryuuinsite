@@ -39,6 +39,7 @@
 	"dependencies": {
 		"@elysiajs/openapi": "^1.4.11",
 		"@prisma/client": "^6.17.1",
+		"@tqman/nice-logger": "^1.1.1",
 		"elysia": "^1.4.12",
 		"memoirist": "^0.4.0",
 		"mode-watcher": "^1.1.0",

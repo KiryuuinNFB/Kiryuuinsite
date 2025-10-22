@@ -3,7 +3,7 @@
 
 generator client {
     provider = "prisma-client-js"
-    output   = "../../generated/prisma"
+    output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -12,9 +12,9 @@ datasource db {
 }
 
 model Commission {
-    id    Int    @id @default(autoincrement())
-    stats Status @default(Queued)
-    notes String @default("-")
+    id     Int    @id @default(autoincrement())
+    status Status @default(Queued)
+    notes  String @default("-")
 }
 
 enum Status {
