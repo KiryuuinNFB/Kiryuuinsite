@@ -2,7 +2,7 @@ import type { ColumnDef } from "@tanstack/table-core";
 
 export type Work= {
     id: number;
-    stats: "Queued" | "Working" | "Finished";
+    status: "Queued" | "Working" | "Finished";
     notes: string
 }
 
@@ -12,7 +12,7 @@ export const columns: ColumnDef<Work>[] = [
         header: "ID",
     },
     {
-        accessorKey: "stats",
+        accessorKey: "status",
         header: "Status",
     },
     {

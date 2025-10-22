@@ -2,6 +2,8 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import DataTable from "./data-table.svelte";
 	import { columns } from "./columns.js";
+
+	export let data;
 </script>
 
 <div
@@ -19,6 +21,6 @@
 				</p>
 			</div>
 		</div>
-		
+		<DataTable data={data.data} {columns} />
 	</div>
 </div>
