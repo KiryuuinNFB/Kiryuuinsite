@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Separator } from '$lib/components/ui/separator/index.js';
+	import DataTable from "./data-table.svelte";
+	import { columns } from "./columns.js";
 </script>
 
 <div
@@ -17,5 +19,6 @@
 				</p>
 			</div>
 		</div>
+		
 	</div>
 </div>
