@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Commission {
-    id Int @id @default(autoincrement())
+    id    Int    @id @default(autoincrement())
     stats Status @default(Queued)
     notes String @default("-")
 }

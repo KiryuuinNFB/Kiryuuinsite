@@ -21,7 +21,7 @@
 			<ButtonGroup.Root>
 				<ButtonGroup.Root>
 					<Button variant="outline" href="/about">About</Button>
-					<Button variant="outline">Commission</Button>
+					<Button variant="outline" href="/commission">Commission</Button>
 					<Button variant="outline">Music</Button>
 					<Button variant="outline" href="/contact">Contact</Button>
 				</ButtonGroup.Root>
@@ -48,7 +48,7 @@
 					</div>
 					<Separator />
 					<Button variant="outline" href="/about" size="lg">About</Button>
-					<Button variant="outline" size="lg">Commission</Button>
+					<Button variant="outline" href="/commission" size="lg">Commission</Button>
 					<Button variant="outline" size="lg">Music</Button>
 					<Button variant="outline" href="/contact" size="lg">Contact</Button>
 					<Separator />
