@@ -12,7 +12,6 @@ COPY src ./src
 RUN bun install
 RUN bunx prisma generate 
 RUN bunx prisma db push
-COPY --from=builder /app/node_modules node_modules/
 COPY . .
 RUN bun run build
 
