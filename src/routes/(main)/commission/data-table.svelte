@@ -31,7 +31,7 @@
     <Table.Root>
         <Table.Header>
             {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-                <Table.Row>
+                <Table.Row class="bg-sidebar-accent">
                     {#each headerGroup.headers as header (header.id)}
                         <Table.Head colspan={header.colSpan}>
                             {#if !header.isPlaceholder}

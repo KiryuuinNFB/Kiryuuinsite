@@ -1,6 +1,7 @@
 import type { ColumnDef } from "@tanstack/table-core";
 
-export type Work= {
+
+export type Work = {
     id: number;
     status: "Queued" | "Working" | "Finished";
     notes: string

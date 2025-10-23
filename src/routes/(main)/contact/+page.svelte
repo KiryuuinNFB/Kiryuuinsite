@@ -48,8 +48,7 @@
 						target="_blank"
 						class="hover:text-signature">this server.</a
 					>
-					Feel free to DM me. I'll usually read and reply to your message within 24 hours unless I have
-					no access to the internet, died, on a plane or haven't came up with a proper reply.
+					Feel free to DM me. I'll usually read and reply to your message within 24 hours. If not please DM me again.
 				</p>
 			</div>
 		</div>
