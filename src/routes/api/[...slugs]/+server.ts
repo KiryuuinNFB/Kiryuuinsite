@@ -9,7 +9,38 @@ const app = new Elysia({ prefix: '/api' })
     .use(openapi())
     .use(logger())
     .get('/', () => "You found this page. Kiryuuin won't be happy if you go to /api/openapi")
-    .group('/cms', app => 
+    .group('/comstat', app =>
+        app
+            .get('/', async () => {
+                const allcms = await prisma.comstat.findFirst()
+
+                return allcms
+            })
+            .post('/', async ({ body }) => {
+                const { status } = body;
+                const stat = await prisma.comstat.upsert({
+                    where: {
+                        id: 1
+                    },
+                    update: {
+                        isOpen: status,
+                    },
+                    create: {
+                        id: 1,
+                        isOpen: status,
+                    }
+                });
+
+                return {
+                    status: stat.isOpen
+                }
+            }, {
+                body: t.Object({
+                    status: t.Boolean()
+                })
+            })
+    )
+    .group('/cms', app =>
         app
             .get('/', async () => {
                 const allcms = await prisma.commission.findMany()

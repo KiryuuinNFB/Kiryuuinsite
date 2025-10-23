@@ -4,6 +4,8 @@
 	import { columns } from "./columns.js";
 
 	export let data;
+
+
 </script>
 
 <div
@@ -21,6 +23,7 @@
 				</p>
 			</div>
 		</div>
+		<h1 class="text-2xl font-bold p-4">Commission status : {data.status}</h1>
 		<DataTable data={data.data} {columns} />
 	</div>
 </div>

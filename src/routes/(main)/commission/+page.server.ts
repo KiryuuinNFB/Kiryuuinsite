@@ -8,8 +8,18 @@ export const load: PageServerLoad = async ({ fetch }) => {
         }
     })
 
+    const status = await fetch("/api/comstat", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
     const data = await res.json()
+    const parsedstat = await status.json()
+    
     return {
-        "data": data
+        "data": data,
+        "status": parsedstat.isOpen
     }
 }

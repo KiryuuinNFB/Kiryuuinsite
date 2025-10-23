@@ -17,8 +17,14 @@ model Commission {
     notes  String @default("-")
 }
 
+model Comstat {
+    id     Int     @id @default(1)
+    isOpen Boolean @default(false)
+}
+
 enum Status {
     Queued
     Working
     Finished
 }
+
