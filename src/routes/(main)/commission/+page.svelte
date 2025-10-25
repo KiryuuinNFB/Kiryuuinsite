@@ -20,7 +20,14 @@
 				<p>
 					I can turn your draft into a finished song. I can make a vocal synth cover for you. I can
 					make a remix in some genres I'm familiar with. To actually commission me please contact me
-					via my Discord DM. You also name the price but mininum is 500 THB.
+					via my Discord DM. You also name the price but mininum is 500 THB. I don't accept payment
+					if the work isn't finished.
+				</p>
+				<p class="pt-4">
+					Note that I'm busy on other stuff as well and a work could take up to months to finish.
+					This is why I set the price so low. And since unexpected work outside of commission can
+					make your work take even longer to finish, I would prefer the deadline to be very long or
+					no deadline at all.
 				</p>
 			</div>
 		</div>
@@ -50,18 +57,36 @@
 		<h1 class="text-4xl font-bold p-4">Sample works</h1>
 		<Separator />
 		<div class="p-4">
-			<p>i swear this is temporary</p>
+			<p>Tetoris Thai Cover and remix - Client named the price to be 3000 THB</p>
 		</div>
 
-		<div class="m-4">
+		<div class="m-4 md:flex hidden">
 			<iframe
-				title="tetoris"
-				width="711"
-				height="144"
+				width="560"
+				height="315"
+				src="https://www.youtube.com/embed/W6uxodOzx7A?si=5KP0fUF3PWOxSh8N"
+				title="YouTube video player"
 				frameborder="0"
-				src="https://mega.nz/embed/W6ZTXKrT#zK_InVQD8DsbgkTvLsuXnYMLuo1GOmfBbQjn7gZVsKM!1v1c"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+				referrerpolicy="strict-origin-when-cross-origin"
 				allowfullscreen
 			></iframe>
+		</div>
+
+		<div class="m-4 md:hidden flex">
+			<iframe
+				width="300"
+				height="150"
+				src="https://www.youtube.com/embed/W6uxodOzx7A?si=5KP0fUF3PWOxSh8N"
+				title="YouTube video player"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+				referrerpolicy="strict-origin-when-cross-origin"
+				allowfullscreen
+			></iframe>
+		</div>
+		<div class="p-4">
+			<p>For more details please contact me directly.</p>
 		</div>
 	</div>
 </div>
