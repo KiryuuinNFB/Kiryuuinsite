@@ -37,6 +37,7 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
+		"@elysiajs/jwt": "^1.4.0",
 		"@elysiajs/openapi": "^1.4.11",
 		"@prisma/client": "^6.17.1",
 		"@tanstack/svelte-table": "^8.21.3",

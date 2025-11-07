@@ -2,12 +2,19 @@ import { Elysia, t } from 'elysia';
 import { openapi } from '@elysiajs/openapi'
 import { PrismaClient } from "@prisma/client";
 import { logger } from "@tqman/nice-logger";
+import { jwt } from '@elysiajs/jwt'
 
 const prisma = new PrismaClient()
 
 const app = new Elysia({ prefix: '/api' })
     .use(openapi())
     .use(logger())
+    .use(
+        jwt({
+            name: 'jwt',
+            secret: "PLEASE_CHANGE_THIS_IN_VPS"
+        })
+    )
     .get('/', () => "You found this page. Kiryuuin won't be happy if you go to /api/openapi")
     .group('/comstat', app =>
         app
@@ -116,5 +123,21 @@ const app = new Elysia({ prefix: '/api' })
                 })
             })
     )
+    .group('auth', app =>
+        app
+            .post('/login', async ({ jwt, body }) => {
+                const { username, password } = body;
+
+                //do this later
+            }, {
+                body: t.Object({
+                    username: t.String(),
+                    password: t.String()
+                },
+                    {
+                        error: "Invalid credentials"
+                    })
+            }))
+
 type RequestHandler = (v: { request: Request }) => Response | Promise<Response>;
 export const fallback: RequestHandler = ({ request }) => app.handle(request);
