@@ -123,12 +123,26 @@ const app = new Elysia({ prefix: '/api' })
                 })
             })
     )
-    .group('auth', app =>
+    .group('/auth', app =>
         app
-            .post('/login', async ({ jwt, body }) => {
+            .post('login', async ({ jwt, body, cookie: { auth } }) => {
                 const { username, password } = body;
+                //const hashed = await Bun.password.hash(password, { algorithm: "argon2id", memoryCost: 64 * 1024, timeCost: 3 })
 
-                //do this later
+                const isMatch = await Bun.password.verify(password, "$argon2id$v=19$m=65536,t=3,p=1$/T3uwOtMBm2jlOfSntQlAf+F+lkNJCJI2w5hYpAlAxY$quZmibRZSOGvDAZXNh+9FBLxJUGn/IRzBdFlOQ9aHKQ")
+                if (isMatch) {
+                    const value = await jwt.sign({ username: username, exp: "30min" })
+
+                    auth.set({
+                        value,
+                        httpOnly: true,
+                        maxAge: 60*30,
+                        path: '/',
+                    })
+
+                }
+
+                return { isMatch }
             }, {
                 body: t.Object({
                     username: t.String(),
