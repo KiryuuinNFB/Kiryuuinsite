@@ -18,8 +18,11 @@
 				password: password
 			})
 		})
-		const fetched = await res.json()
-		return res.json()
+		if (res.status === 401) {
+			alert("Wrong username or password")
+		} else if (res.status === 200) {
+			goto('admin/cmsedit')
+		}
 	}
 
 
