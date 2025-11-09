@@ -2,9 +2,27 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from "$lib/components/ui/button/index.js";
+	import { goto } from "$app/navigation";
 
 	let username: string;
 	let password: string;
+
+	const login = async () => {
+		const res = await fetch("/api/auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				username: username,
+				password: password
+			})
+		})
+		const fetched = await res.json()
+		return res.json()
+	}
+
+
 </script>
 
 <div
@@ -22,7 +40,7 @@
 				<label for="password" class="text-muted-foreground">Password</label>
 				<Input id="password" type="password" bind:value={password}/>
 				
-				<Button onclick={() => {alert(username + password)}}>
+				<Button onclick={login}>
 					Login
 				</Button>
 			</div>

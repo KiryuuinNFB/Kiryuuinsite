@@ -1,4 +1,4 @@
-import { Elysia, t } from 'elysia';
+import { Elysia, status, t } from 'elysia';
 import { openapi } from '@elysiajs/openapi'
 import { PrismaClient } from "@prisma/client";
 import { logger } from "@tqman/nice-logger";
@@ -128,9 +128,13 @@ const app = new Elysia({ prefix: '/api' })
             .post('login', async ({ jwt, body, cookie: { auth } }) => {
                 const { username, password } = body;
                 //const hashed = await Bun.password.hash(password, { algorithm: "argon2id", memoryCost: 64 * 1024, timeCost: 3 })
-
+                const isUser = await  Bun.password.verify(username, "$argon2id$v=19$m=65536,t=3,p=1$CM+OyxW8Hf36vtHncccVYMKcirnERbMi3sVJZqbL26I$oD9ovostRkvPkfTq0ezZASRHIIJ+vHpv53z6Wls2j7g")
                 const isMatch = await Bun.password.verify(password, "$argon2id$v=19$m=65536,t=3,p=1$/T3uwOtMBm2jlOfSntQlAf+F+lkNJCJI2w5hYpAlAxY$quZmibRZSOGvDAZXNh+9FBLxJUGn/IRzBdFlOQ9aHKQ")
-                if (isMatch) {
+                if(!isMatch || !isUser) {
+                    return status(401, 'Forbidden')
+                }
+                
+                if (isMatch && isUser) {
                     const value = await jwt.sign({ username: username, exp: "30min" })
 
                     auth.set({
@@ -142,7 +146,6 @@ const app = new Elysia({ prefix: '/api' })
 
                 }
 
-                return { isMatch }
             }, {
                 body: t.Object({
                     username: t.String(),
