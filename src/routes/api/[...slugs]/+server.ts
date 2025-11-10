@@ -133,6 +133,12 @@ const app = new Elysia({ prefix: '/api' })
                     id: t.Number()
                 })
             })
+            .delete('/purge', async () => {
+                await prisma.commission.deleteMany()
+                await prisma.$executeRawUnsafe(`DELETE FROM sqlite_sequence WHERE name='Commission';`);
+
+                return "Purged"
+            })
     )
     .group('/auth', app =>
         app

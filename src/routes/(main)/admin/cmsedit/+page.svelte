@@ -13,12 +13,26 @@
 
 	export let data;
 
+	let cmsdata: any
+	cmsdata = data.data
+
 	let selectedCms: number;
 	let indiviCms: any = {};
 
 	let editWindow: boolean = false;
 	let createWindow: boolean = false;
 	let alertWindow: boolean = false;
+
+	const getAllCms = async () => {
+		const res = await fetch('/api/cms', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		data = await res.json();
+		cmsdata = data
+	};
 
 	const getIndividualCms = async (num: number) => {
 		const res = await fetch(`/api/cms/${num}`, {
@@ -44,6 +58,7 @@
 			})
 		});
 		editWindow = false;
+		getAllCms()
 		return res.json();
 	};
 
@@ -59,6 +74,7 @@
 			})
 		});
 		createWindow = false;
+		getAllCms()
 		return res.json();
 	};
 
@@ -74,6 +90,7 @@
 		});
 		alertWindow = false;
 		editWindow = false;
+		getAllCms()
 		return res.json();
 	};
 
@@ -105,8 +122,9 @@
 		<Separator />
 		<div class="flex flex-row">
 			<div class="p-4 space-y-4">
+				<p>Click to edit row. Refresh to see changes.</p>
 				<Button variant="secondary" onclick={handleCreateClick}><Plus />Add</Button>
-				<DataTable data={data.data} {columns} onRowClick={handleRowClick} />
+				<DataTable data={cmsdata} {columns} onRowClick={handleRowClick} />
 			</div>
 		</div>
 	</div>
@@ -127,7 +145,9 @@
 						>
 						<AlertDialog.Content>
 							<AlertDialog.Header>
-								<AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
+								<AlertDialog.Title
+									>Are you absolutely sure you want to delete commission id {selectedCms}?</AlertDialog.Title
+								>
 							</AlertDialog.Header>
 							<AlertDialog.Footer>
 								<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>

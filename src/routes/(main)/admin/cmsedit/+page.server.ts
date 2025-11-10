@@ -16,5 +16,8 @@ export const load: PageServerLoad = async ({ cookies, fetch }) => {
 
     const data = await res.json()
 
-    return { data }
+    return { 
+        "data": data,
+        "token": token
+     }
 }
