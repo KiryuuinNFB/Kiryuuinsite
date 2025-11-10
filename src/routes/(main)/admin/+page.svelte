@@ -1,31 +1,30 @@
 <script lang="ts">
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
-	import { Button } from "$lib/components/ui/button/index.js";
-	import { goto } from "$app/navigation";
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { goto } from '$app/navigation';
+	import { Label } from '$lib/components/ui/label/index.js';
 
 	let username: string;
 	let password: string;
 
 	const login = async () => {
-		const res = await fetch("/api/auth/login", {
-			method: "POST",
+		const res = await fetch('/api/auth/login', {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				username: username,
 				password: password
 			})
-		})
+		});
 		if (res.status === 401) {
-			alert("Wrong username or password")
+			alert('Wrong username or password');
 		} else if (res.status === 200) {
-			goto('admin/cmsedit')
+			goto('admin/cmsedit');
 		}
-	}
-
-
+	};
 </script>
 
 <div
@@ -38,14 +37,16 @@
 		<Separator />
 		<div class="flex flex-row">
 			<div class="p-4 space-y-4">
-				<label for="text" class="text-muted-foreground">Username</label>
-				<Input id="text" type="text" bind:value={username} />
-				<label for="password" class="text-muted-foreground">Password</label>
-				<Input id="password" type="password" bind:value={password}/>
-				
-				<Button onclick={login}>
-					Login
-				</Button>
+				<div class="space-y-2">
+					<Label for="text" class="text-muted-foreground">Username</Label>
+					<Input id="text" type="text" bind:value={username} />
+				</div>
+				<div class="space-y-2">
+					<Label for="password" class="text-muted-foreground">Password</Label>
+					<Input id="password" type="password" bind:value={password} />
+				</div>
+
+				<Button onclick={login}>Login</Button>
 			</div>
 		</div>
 	</div>

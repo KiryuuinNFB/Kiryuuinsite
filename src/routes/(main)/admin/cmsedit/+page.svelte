@@ -4,8 +4,12 @@
 	import { columns } from './columns.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
+	import { Trash2, Plus } from '@lucide/svelte';
 
-	import StatusSelect from "./StatusSelect.svelte";
+	import StatusSelect from './StatusSelect.svelte';
 
 	export let data;
 
@@ -13,6 +17,8 @@
 	let indiviCms: any = {};
 
 	let editWindow: boolean = false;
+	let createWindow: boolean = false;
+	let alertWindow: boolean = false;
 
 	const getIndividualCms = async (num: number) => {
 		const res = await fetch(`/api/cms/${num}`, {
@@ -25,6 +31,52 @@
 		return res.json();
 	};
 
+	const updateCms = async () => {
+		const res = await fetch('/api/cms', {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				id: selectedCms,
+				status: createStatus,
+				notes: createNotes
+			})
+		});
+		editWindow = false;
+		return res.json();
+	};
+
+	const createCms = async () => {
+		const res = await fetch('/api/cms', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				status: createStatus,
+				notes: createNotes
+			})
+		});
+		createWindow = false;
+		return res.json();
+	};
+
+	const deleteCms = async () => {
+		const res = await fetch('/api/cms', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				id: selectedCms
+			})
+		});
+		alertWindow = false;
+		editWindow = false;
+		return res.json();
+	};
+
 	let createStatus: string;
 	let createNotes: string;
 
@@ -33,12 +85,14 @@
 		const cms = await getIndividualCms(selectedCms);
 		indiviCms = cms;
 		editWindow = true;
-		
-		createStatus = indiviCms.status
-		createNotes = indiviCms.notes
+
+		createStatus = indiviCms.status;
+		createNotes = indiviCms.notes;
 	};
 
-	
+	const handleCreateClick = async () => {
+		createWindow = true;
+	};
 </script>
 
 <div
@@ -50,27 +104,69 @@
 		<h1 class="text-4xl font-bold p-4">Edit Commission Table</h1>
 		<Separator />
 		<div class="flex flex-row">
-			<div class="p-4">
+			<div class="p-4 space-y-4">
+				<Button variant="secondary" onclick={handleCreateClick}><Plus />Add</Button>
 				<DataTable data={data.data} {columns} onRowClick={handleRowClick} />
 			</div>
 		</div>
 	</div>
-</div>
 
-<Dialog.Root bind:open={editWindow}>
-	<Dialog.Content>
-		<Dialog.Title>Commission edit</Dialog.Title>
-		<Dialog.Description>lorem ipsum</Dialog.Description>
-		<div>
-			<StatusSelect bind:value={createStatus} />
-		</div>
-		
-		<Dialog.Footer>
-			<Button
-				onclick={() => {
-					editWindow = false;
-				}}>Save changes</Button
-			>
-		</Dialog.Footer>
-	</Dialog.Content>
-</Dialog.Root>
+	<Dialog.Root bind:open={editWindow}>
+		<Dialog.Content class="font-sans selection:text-background selection:bg-signature">
+			<Dialog.Title>Commission edit</Dialog.Title>
+			<div class="justify-between flex flex-row">
+				<div class="grid gap-2">
+					<Label for="prefix" class="text-muted-foreground">Work Status</Label>
+					<StatusSelect bind:value={createStatus} />
+				</div>
+				<div class="grid gap-2">
+					<Label for="prefix" class="text-background">f</Label>
+					<AlertDialog.Root bind:open={alertWindow}>
+						<AlertDialog.Trigger
+							><Button variant="destructive"><Trash2 /></Button></AlertDialog.Trigger
+						>
+						<AlertDialog.Content>
+							<AlertDialog.Header>
+								<AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
+							</AlertDialog.Header>
+							<AlertDialog.Footer>
+								<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+								<AlertDialog.Action onclick={deleteCms}>Continue</AlertDialog.Action>
+							</AlertDialog.Footer>
+						</AlertDialog.Content>
+					</AlertDialog.Root>
+				</div>
+			</div>
+
+			<div class="grid gap-2">
+				<Label for="text" class="text-muted-foreground">Notes</Label>
+				<Input id="text" type="text" bind:value={createNotes} />
+			</div>
+
+			<Dialog.Footer>
+				<Button onclick={updateCms}>Save changes</Button>
+			</Dialog.Footer>
+		</Dialog.Content>
+	</Dialog.Root>
+
+	<Dialog.Root bind:open={createWindow}>
+		<Dialog.Content class="font-sans selection:text-background selection:bg-signature">
+			<Dialog.Title>Add commission</Dialog.Title>
+			<div class="justify-between flex flex-row">
+				<div class="grid gap-2">
+					<Label for="prefix" class="text-muted-foreground">Work Status</Label>
+					<StatusSelect bind:value={createStatus} />
+				</div>
+			</div>
+
+			<div class="grid gap-2">
+				<Label for="text" class="text-muted-foreground">Notes</Label>
+				<Input id="text" type="text" bind:value={createNotes} />
+			</div>
+
+			<Dialog.Footer>
+				<Button onclick={createCms}>Done</Button>
+			</Dialog.Footer>
+		</Dialog.Content>
+	</Dialog.Root>
+</div>
