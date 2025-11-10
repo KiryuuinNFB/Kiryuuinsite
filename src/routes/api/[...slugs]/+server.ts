@@ -54,6 +54,17 @@ const app = new Elysia({ prefix: '/api' })
 
                 return allcms
             })
+            .get('/:id', async ({ params }) => {
+                const { id } = params as { id: string };
+
+                const cms = await prisma.commission.findUnique({
+                    where: {
+                        id: Number(id)
+                    }
+                })
+
+                return cms
+            })
             .put('/', async ({ body }) => {
                 const { status, notes } = body;
                 const cms = await prisma.commission.create({
