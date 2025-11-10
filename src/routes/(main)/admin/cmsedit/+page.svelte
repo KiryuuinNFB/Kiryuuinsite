@@ -7,14 +7,14 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
-	import { Trash2, Plus } from '@lucide/svelte';
+	import { Trash2, Plus, Shredder } from '@lucide/svelte';
 
 	import StatusSelect from './StatusSelect.svelte';
 
 	export let data;
 
-	let cmsdata: any
-	cmsdata = data.data
+	let cmsdata: any;
+	cmsdata = data.data;
 
 	let selectedCms: number;
 	let indiviCms: any = {};
@@ -22,23 +22,26 @@
 	let editWindow: boolean = false;
 	let createWindow: boolean = false;
 	let alertWindow: boolean = false;
+	let alertWindow1: boolean = false;
 
 	const getAllCms = async () => {
-		const res = await fetch('/api/cms', {
+		const res = await fetch('/api/commissions', {
 			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'authorization': data.token
 			}
 		});
-		data = await res.json();
-		cmsdata = data
+		
+		cmsdata = await res.json();
 	};
 
 	const getIndividualCms = async (num: number) => {
 		const res = await fetch(`/api/cms/${num}`, {
 			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'authorization': data.token
 			}
 		});
 
@@ -49,7 +52,8 @@
 		const res = await fetch('/api/cms', {
 			method: 'PATCH',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'authorization': data.token
 			},
 			body: JSON.stringify({
 				id: selectedCms,
@@ -58,7 +62,7 @@
 			})
 		});
 		editWindow = false;
-		getAllCms()
+		getAllCms();
 		return res.json();
 	};
 
@@ -66,7 +70,8 @@
 		const res = await fetch('/api/cms', {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'authorization': data.token
 			},
 			body: JSON.stringify({
 				status: createStatus,
@@ -74,7 +79,7 @@
 			})
 		});
 		createWindow = false;
-		getAllCms()
+		getAllCms();
 		return res.json();
 	};
 
@@ -82,7 +87,8 @@
 		const res = await fetch('/api/cms', {
 			method: 'DELETE',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'authorization': data.token
 			},
 			body: JSON.stringify({
 				id: selectedCms
@@ -90,7 +96,7 @@
 		});
 		alertWindow = false;
 		editWindow = false;
-		getAllCms()
+		getAllCms();
 		return res.json();
 	};
 
@@ -108,7 +114,21 @@
 	};
 
 	const handleCreateClick = async () => {
+		createNotes = "-"
 		createWindow = true;
+	};
+
+	const purgeDB = async () => {
+		const res = await fetch('/api/cms/purge', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': data.token
+			}
+		});
+		alertWindow1 = false;
+		getAllCms();
+		return res.json();
 	};
 </script>
 
@@ -122,8 +142,29 @@
 		<Separator />
 		<div class="flex flex-row">
 			<div class="p-4 space-y-4">
-				<p>Click to edit row. Refresh to see changes.</p>
-				<Button variant="secondary" onclick={handleCreateClick}><Plus />Add</Button>
+				<div class="justify-between flex flex-row">
+					<Button variant="secondary" onclick={handleCreateClick}><Plus />Add</Button>
+
+					<AlertDialog.Root bind:open={alertWindow1}>
+						<AlertDialog.Trigger
+							><Button variant="destructive"><Shredder />Purge Database</Button
+							></AlertDialog.Trigger
+						>
+						<AlertDialog.Content>
+							<AlertDialog.Header>
+								<AlertDialog.Title
+									>Are you absolutely sure you want to completely delete the database and reset the
+									count?</AlertDialog.Title
+								>
+							</AlertDialog.Header>
+							<AlertDialog.Footer>
+								<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+								<AlertDialog.Action onclick={purgeDB}>Continue</AlertDialog.Action>
+							</AlertDialog.Footer>
+						</AlertDialog.Content>
+					</AlertDialog.Root>
+				</div>
+
 				<DataTable data={cmsdata} {columns} onRowClick={handleRowClick} />
 			</div>
 		</div>

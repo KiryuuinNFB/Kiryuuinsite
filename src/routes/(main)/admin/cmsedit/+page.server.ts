@@ -7,10 +7,11 @@ export const load: PageServerLoad = async ({ cookies, fetch }) => {
         redirect(307, "/admin")
     }
 
-    const res = await fetch("/api/cms", {
+    const res = await fetch("/api/commissions", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'authorization': token
         }
     })
 
