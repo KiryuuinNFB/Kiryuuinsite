@@ -1,5 +1,5 @@
 import { Elysia, status, t, file } from 'elysia';
-//import { openapi } from '@elysiajs/openapi'
+import { openapi } from '@elysiajs/openapi'
 import { PrismaClient } from "@prisma/client";
 import { logger } from "@tqman/nice-logger";
 import { jwt } from '@elysiajs/jwt'
@@ -7,7 +7,7 @@ import { jwt } from '@elysiajs/jwt'
 const prisma = new PrismaClient()
 
 const app = new Elysia({ prefix: '/api' })
-    //.use(openapi())
+    .use(openapi())
     .use(logger())
     .use(
         jwt({

@@ -15,10 +15,19 @@ export const load: PageServerLoad = async ({ cookies, fetch }) => {
         }
     })
 
+    const status = await fetch("/api/comstat", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
     const data = await res.json()
+     const parsedstat = await status.json()
 
     return { 
         "data": data,
-        "token": token
+        "token": token,
+        "status": parsedstat.isOpen
      }
 }

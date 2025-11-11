@@ -7,6 +7,7 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
+	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Trash2, Plus, Shredder } from '@lucide/svelte';
 
 	import StatusSelect from './StatusSelect.svelte';
@@ -19,20 +20,38 @@
 	let selectedCms: number;
 	let indiviCms: any = {};
 
+	let openStat: boolean;
+	openStat = data.status;
+
 	let editWindow: boolean = false;
 	let createWindow: boolean = false;
 	let alertWindow: boolean = false;
 	let alertWindow1: boolean = false;
+
+	const setCmsStatus = async () => {
+		const res = await fetch('/api/cms', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: data.token
+			},
+			body: JSON.stringify({
+				status: openStat
+			})
+		});
+		const fetched = await res.json();
+		openStat = fetched.status;
+	};
 
 	const getAllCms = async () => {
 		const res = await fetch('/api/commissions', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': data.token
+				authorization: data.token
 			}
 		});
-		
+
 		cmsdata = await res.json();
 	};
 
@@ -41,7 +60,7 @@
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': data.token
+				authorization: data.token
 			}
 		});
 
@@ -53,7 +72,7 @@
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': data.token
+				authorization: data.token
 			},
 			body: JSON.stringify({
 				id: selectedCms,
@@ -71,7 +90,7 @@
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': data.token
+				authorization: data.token
 			},
 			body: JSON.stringify({
 				status: createStatus,
@@ -88,7 +107,7 @@
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': data.token
+				authorization: data.token
 			},
 			body: JSON.stringify({
 				id: selectedCms
@@ -114,7 +133,7 @@
 	};
 
 	const handleCreateClick = async () => {
-		createNotes = "-"
+		createNotes = '-';
 		createWindow = true;
 	};
 
@@ -123,7 +142,7 @@
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-				'authorization': data.token
+				authorization: data.token
 			}
 		});
 		alertWindow1 = false;
@@ -142,6 +161,11 @@
 		<Separator />
 		<div class="flex flex-row">
 			<div class="p-4 space-y-4">
+				<div class="grid gap-2">
+					<Label for="cms" class="text-muted-foreground">Commission Status</Label>
+					<Switch id="cms" bind:checked={openStat} onCheckedChange={setCmsStatus} />
+					
+				</div>
 				<div class="justify-between flex flex-row">
 					<Button variant="secondary" onclick={handleCreateClick}><Plus />Add</Button>
 
